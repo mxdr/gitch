@@ -1,8 +1,9 @@
-upstream=$(git rev-parse --abbrev-ref $1@{upstream} 2>/dev/null)
+branch=$(git branch --show-current)
+upstream=$(git rev-parse --abbrev-ref $branch@{upstream} 2>/dev/null)
 if [[ $? == 0 ]]; then
-echo $1 tracks $upstream
-git push $1
+echo $branch tracks $upstream
+git push
 else
-echo $1 has no upstream configured
-git push -u origin $1
+echo $branch has no upstream configured
+git push -u origin $branch
 fi
